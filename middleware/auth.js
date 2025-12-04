@@ -10,7 +10,7 @@ const a = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   jwt.verify(token, secretkey, (err, user) => {
-    if (err) return res.status(403).send("Invalid or  token expired");
+    if (err) return res.status(403).send("Invalid or  token");
     req.user = user;
     next();
   });

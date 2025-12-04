@@ -1,6 +1,11 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import db from "./config/db.js";
 import authMiddleware from "./middleware/auth.js";
+
+
 
 import authRoutes from "./routes/authRoutes.js";
 import registerRoutes from "./routes/registrationRoutes.js";
@@ -23,8 +28,10 @@ app.use("/update", updateTaskRoutes);
 app.use("/delete", deleteTaskRoutes);
 app.use("/users", viewUsersRoutes);
 
+console.log(process.env.DB_DIALECT)
 db.sync()
-  .then(() => console.log("Tables Synced "))
+  .then(() => console.log("Tables Synced "),
+app.listen(3000, () => console.log("Server running on port 3000")))
   .catch(err => console.error(err));
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+
