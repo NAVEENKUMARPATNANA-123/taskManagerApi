@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+
 import express from "express";
 import db from "./config/db.js";
 import authMiddleware from "./middleware/auth.js";
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use("/register", registerRoutes);
 app.use("/auth", authRoutes);
 
-app.use(authMiddleware);
+
 app.use("/task", taskRoutes);
 app.use("/view", viewTaskRoutes);
 app.use("/update", updateTaskRoutes);
