@@ -1,4 +1,6 @@
 import bcrypt from "bcrypt";
+
+import registration from "../services/registrationService.js";
 import db from "../models/index.js"; 
 const users = db.users; 
 
@@ -9,16 +11,17 @@ const a=async (req, res) => {
   if (!email || !password || !role)
     return res.status(400).send("Email, password and role required");
 
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+  registration(req, res);
+//   try {
+//     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await users.create({id,email, password: hashedPassword, role});
+//     await users.create({id,email, password: hashedPassword, role});
 
-    res.send(`User registered successfully,${email},${hashedPassword}`);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Database error");
-  }
+//     res.send(`User registered successfully,${email},${hashedPassword}`);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Database error");
+//   }
 }
 
 export default a;
