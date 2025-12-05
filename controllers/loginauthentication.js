@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import db from "../models/index.js"; 
+import loginService from "../services/loginService.js";
 
 const User = db.users; 
 
@@ -26,15 +27,8 @@ const secretKey = "Naveen";
     if (user.role !== role) {
       return res.status(403).send("Access denied: role mismatch");
     }
-    const userData = { email: user.email, role: user.role };
-    const token = jwt.sign(
-      userData,
-      secretKey,
-      { expiresIn: "1h" }
-    );
-
-    res.json({
-      message: "Login successful", token});
+   
+    loginService(req, res,user);
 
   } catch (err) {
     console.error(err);

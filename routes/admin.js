@@ -5,16 +5,12 @@ import authorization from "../middleware/authorization.js";
 import viewTask from "../controllers/viewTask.js";
 import viewUsers from "../controllers/viewUsers.js";
 
-
-
-router.get("/", authorization);
+router.get("/", authorization,(req, res) => {
+  res.send(`Welcome admin, ${req.user.email}`);
+});
 
 router.get("/viewTask", authorization, viewTask);
 
-
 router.get("/viewUsers", authorization, viewUsers);
 
-
-
 export default router;
-

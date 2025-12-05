@@ -4,11 +4,6 @@ import  jwt  from "jsonwebtoken"
 const secretkey = "Naveen";
 
 const a = (req, res, next) => {
-    if (req.user.role === "admin") {
-    res.send(`Welcome admin, ${req.user.email}`);
-  } else {
-    res.status(403).send("Access denied — admin only");
-  }
   const authHeader = req.headers.authorization;
 
   if (!authHeader) return res.status(401).send("No token provided");
@@ -18,11 +13,14 @@ const a = (req, res, next) => {
   jwt.verify(token, secretkey, (err, user) => {
     if (err) return res.status(403).send("Invalid or  token");
     req.user = user;
-    next();
+    
   });
+
+    if (req.user.role !== "admin") {
+    res.status(403).send("Access denied — admin only");
+  }
+  
+  next();
 };
-
-
-
 
 export default a;
