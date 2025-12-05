@@ -10,6 +10,9 @@ const a=async (req, res) => {
 
   if (!email || !password || !role)
     return res.status(400).send("Email, password and role required");
+  if (role==="admin"){
+    return res.status(403).send("Admin registration is not allowed");
+  }
 
   registration(req, res);
 //   try {

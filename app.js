@@ -1,19 +1,12 @@
-
 import express from "express";
 import db from "./config/db.js";
 
-
 import index from "./routes/index.js";
-import admin from "./routes/admin.js";
-import user from "./routes/user.js";
 
 const app = express();
 app.use(express.json());
 
-app.use("/index",index)
-app.use("/admin",admin)
-app.use("/user",user)
-
+app.use("/api",index)
 
 db.sync()
   .then(() => console.log("Tables Synced "),

@@ -4,10 +4,14 @@ const router = express.Router();
 import authorization from "../middleware/authorization.js";
 import viewTask from "../controllers/viewTask.js";
 import viewUsers from "../controllers/viewUsers.js";
+import loginAuthentication from "../controllers/loginauthentication.js";
 
 router.get("/", authorization,(req, res) => {
   res.send(`Welcome admin, ${req.user.email}`);
 });
+
+
+router.post("/login",loginAuthentication);
 
 router.get("/viewTask", authorization, viewTask);
 
